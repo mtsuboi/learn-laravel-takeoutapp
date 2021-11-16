@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ItemController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +14,13 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', function () {
-    return view('user.welcome');
+    return view('admin.welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('user.dashboard');
-})->middleware(['auth:users'])->name('dashboard');
+    return view('admin.dashboard');
+})->middleware(['auth:admin'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__.'/admin_auth.php';
+
+// Route::resource('items', ItemController::class)->middleware('auth:admin');
