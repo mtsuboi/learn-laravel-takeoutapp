@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,10 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
+Route::resource('items', ItemController::class)->middleware('auth:admin');
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admin'])->name('dashboard');
 
 require __DIR__.'/admin_auth.php';
-
-// Route::resource('items', ItemController::class)->middleware('auth:admin');

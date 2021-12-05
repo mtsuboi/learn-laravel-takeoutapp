@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ItemController extends Controller
         $query = Item::where('item_name','like','%' . $item_name . '%');
         $items = $query->paginate(5)->withQueryString();
 
-        return view('items/index', compact('items','item_name'));
+        return view('admin/items/index', compact('items','item_name'));
     }
 
     /**
@@ -37,7 +38,7 @@ class ItemController extends Controller
     public function create()
     {
         // 新規作成画面を表示する
-        return view('items/create');
+        return view('admin/items/create');
     }
 
     /**
@@ -62,7 +63,7 @@ class ItemController extends Controller
         // データを保存
         $item->save();
 
-        return redirect('items');
+        return redirect('/admin/items');
     }
 
     /**
@@ -87,7 +88,7 @@ class ItemController extends Controller
         // データを取得
         $item = Item::find($id);
 
-        return view('items/edit',compact('item'));
+        return view('admin/items/edit',compact('item'));
     }
 
     /**
@@ -114,7 +115,7 @@ class ItemController extends Controller
         // データを保存
         $item->save();
 
-        return redirect('items');
+        return redirect('/admin/items');
     }
 
     /**
@@ -134,6 +135,6 @@ class ItemController extends Controller
         // データを削除
         $item->delete();
 
-        return redirect('items');
+        return redirect('/admin/items');
     }
 }

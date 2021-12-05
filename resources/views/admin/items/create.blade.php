@@ -12,7 +12,7 @@
           <!-- Validation Errors -->
           <x-validation-errors class="mb-4 lg:px-24" :errors="$errors" />
 
-          <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:px-24">
+          <form method="POST" action="{{ route('admin.items.store') }}" enctype="multipart/form-data" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:px-24">
             @csrf
             <div class="grid gap-4 grid-cols-1">
               <!-- 商品ID -->
@@ -47,7 +47,7 @@
 
             <div class="mt-4">
               <x-button>保存</x-button>
-              <x-button formmethod="GET" formaction="{{ route('items.index') }}" >戻る</x-button>
+              <x-button formmethod="GET" formaction="{{ route('admin.items.index') }}" >戻る</x-button>
             </div>
 
           </form>

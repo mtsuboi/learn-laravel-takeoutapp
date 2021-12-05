@@ -15,9 +15,9 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
+                    <x-nav-link :href="route('admin.items.index')" :active="request()->routeIs('admin.items.index')">
                         商品マスタ
-                    </x-nav-link> --}}
+                    </x-nav-link>
                 </div>
             </div>
 
