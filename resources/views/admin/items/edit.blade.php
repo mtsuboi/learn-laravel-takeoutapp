@@ -49,7 +49,7 @@
 
             <div class="mt-4">
               <x-button>保存</x-button>
-              <x-button formmethod="GET" formaction="{{ route('admin.items.index') }}" >戻る</x-button>
+              <x-button type="button" onclick="location.href='{{ route('admin.items.index') }}'" >戻る</x-button>
             </div>
 
           </form>
