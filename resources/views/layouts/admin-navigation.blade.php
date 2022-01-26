@@ -69,6 +69,9 @@
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.items.index')" :active="request()->routeIs('admin.items.index')">
+                商品マスタ
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -8,7 +8,7 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
+        <div class="p-3 md:p-6 bg-white border-b border-gray-200">
           <div class="py-3 flex justify-between">
             <x-button type="button" onclick="location.href='{{ route('admin.items.create') }}'">
               <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
@@ -25,12 +25,12 @@
           <table class="table-auto w-full text-left whitespace-no-wrap">
             <thead>
               <tr>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl">商品ID</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品名</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 text-right">単価</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品分類</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品画像</th>
-                <th class="w-10 px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr rounded-br">
+                <th class="px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl">商品ID</th>
+                <th class="px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品名</th>
+                <th class="px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 text-right">単価</th>
+                <th class="px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品分類</th>
+                <th class="px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">商品画像</th>
+                <th class="w-10 px-1 md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr rounded-br">
                   <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                 </th>
               </tr>
@@ -38,16 +38,16 @@
             <tbody>
               @foreach($items as $item)
                 <tr>
-                  <td class="px-4 py-3 border-t-2 border-gray-200">{{$item->item_id}}</td>
-                  <td class="px-4 py-3 border-t-2 border-gray-200">
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{$item->item_id}}</td>
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">
                     <a class="no-underline hover:underline text-blue-500" href="{{ route('admin.items.edit', ['item' => $item->item_id]) }}">{{$item->item_name}}</a>
                   </td>
-                  <td class="px-4 py-3 border-t-2 border-gray-200 text-right">{{number_format($item->unit_price)}}</td>
-                  <td class="px-4 py-3 border-t-2 border-gray-200">{{App\Enums\ItemCategory::getDescription($item->item_category)}}</td>
-                  <td class="px-4 py-3 border-t-2 border-gray-200">
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200 text-right">{{number_format($item->unit_price)}}</td>
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{App\Enums\ItemCategory::getDescription($item->item_category)}}</td>
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">
                     <img class="w-14 h-14" src="{{ asset(isset($item->item_image_path) ? '/storage/' . $item->item_image_path : '/img/noimage.png') }}">
                   </td>
-                  <td class="w-10 px-4 py-3 border-t-2 border-gray-200">
+                  <td class="w-10 px-1 md:px-4 py-3 border-t-2 border-gray-200">
                     <form method="POST" action="{{ route('admin.items.destroy', ['item' => $item->item_id]) }}" onsubmit="return confirm('削除してよろしいですか？')">
                       @method('DELETE')
                       @csrf
