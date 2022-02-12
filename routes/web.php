@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,8 @@ Route::get('/access', function () {
     return view('user.access');
 })->name('access');
 
-Route::get('/order', function () {
-    return view('user.order');
-})->middleware(['auth:users'])->name('order');
+Route::middleware('auth:users')->group(function(){
+    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+});
 
 require __DIR__.'/auth.php';

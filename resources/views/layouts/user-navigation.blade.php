@@ -22,7 +22,7 @@
                     <x-nav-link :href="route('user.access')" :active="request()->routeIs('user.access')">
                         店舗情報
                     </x-nav-link>
-                    <x-nav-link :href="route('user.order')" :active="request()->routeIs('user.order')">
+                    <x-nav-link :href="route('user.items.index')" :active="request()->routeIs('user.items.index')">
                         お取り置き予約
                     </x-nav-link>
                 </div>
@@ -92,7 +92,7 @@
             <x-responsive-nav-link :href="route('user.access')" :active="request()->routeIs('user.access')">
                 店舗情報
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user.order')" :active="request()->routeIs('user.order')">
+            <x-responsive-nav-link :href="route('user.items.index')" :active="request()->routeIs('user.items.index')">
                 お取り置き予約
             </x-responsive-nav-link>
         </div>
