@@ -12,14 +12,14 @@
           <!-- Validation Errors -->
           <x-validation-errors class="mb-4 lg:px-24" :errors="$errors" />
 
-          <form method="POST" action="{{ route('admin.items.update', ['item' => $item->item_id ]) }}" enctype="multipart/form-data" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:px-24">
+          <form method="POST" action="{{ route('admin.items.update', ['item' => $item->id ]) }}" enctype="multipart/form-data" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:px-24">
             @method('PUT')
             @csrf
             <div class="grid gap-4 grid-cols-1">
               <!-- 商品ID -->
               <div>
                 <x-label>商品ID</x-label>
-                <x-input type="text" name="item_id" class="w-1/2 bg-gray-200 text-gray-500" value="{{ $item->item_id }}" disabled />
+                <x-input type="text" name="item_id" class="w-1/2 bg-gray-200 text-gray-500" value="{{ $item->id }}" disabled />
               </div>
               <!-- 商品名 -->
               <div>

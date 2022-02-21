@@ -38,9 +38,9 @@
             <tbody>
               @foreach($items as $item)
                 <tr>
-                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{$item->item_id}}</td>
+                  <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{$item->id}}</td>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">
-                    <a class="no-underline hover:underline text-blue-500" href="{{ route('admin.items.edit', ['item' => $item->item_id]) }}">{{$item->item_name}}</a>
+                    <a class="no-underline hover:underline text-blue-500" href="{{ route('admin.items.edit', ['item' => $item->id]) }}">{{$item->item_name}}</a>
                   </td>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200 text-right">{{number_format($item->unit_price)}}</td>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{App\Enums\ItemCategory::getDescription($item->item_category)}}</td>
@@ -48,7 +48,7 @@
                     <img class="w-14 h-14" src="{{ asset(isset($item->item_image_path) ? '/storage/' . $item->item_image_path : '/img/noimage.png') }}">
                   </td>
                   <td class="w-10 px-1 md:px-4 py-3 border-t-2 border-gray-200">
-                    <form method="POST" action="{{ route('admin.items.destroy', ['item' => $item->item_id]) }}" onsubmit="return confirm('削除してよろしいですか？')">
+                    <form method="POST" action="{{ route('admin.items.destroy', ['item' => $item->id]) }}" onsubmit="return confirm('削除してよろしいですか？')">
                       @method('DELETE')
                       @csrf
                       <button type="submit" class="text-gray-400 hover:text-red-500">

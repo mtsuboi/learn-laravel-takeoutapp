@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ItemController;
+use App\Http\Controllers\User\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,20 +19,27 @@ Route::get('/', function () {
     return view('user.welcome');
 });
 
-Route::get('/news', function () {
+Route::get('news', function () {
     return view('user.news');
 })->name('news');
 
-Route::get('/concept', function () {
+Route::get('concept', function () {
     return view('user.concept');
 })->name('concept');
 
-Route::get('/access', function () {
+Route::get('access', function () {
     return view('user.access');
 })->name('access');
 
 Route::middleware('auth:users')->group(function(){
-    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('show/{id}', [ItemController::class, 'show'])->name('items.show');
+});
+
+Route::prefix('cart')->middleware('auth:users')->group(function(){
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('add', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
 require __DIR__.'/auth.php';
