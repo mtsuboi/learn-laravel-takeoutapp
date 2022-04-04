@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
@@ -27,13 +26,14 @@ class CartController extends Controller
             // 商品情報を補完＆合計金額を計算
             foreach ($sessionCarts as $sessionCart) {
                 $item = Item::findOrFail($sessionCart['item_id']);
-                $items[] = new Cart(
-                    $sessionCart['item_id'],
-                    $item->item_name,
-                    $item->unit_price,
-                    $sessionCart['quantity'],
-                    $item->item_image_path
-                );
+                // 連想配列をオブジェクトに変換して追加
+                $items[] = (object)[
+                    'item_id' => $sessionCart['item_id'],
+                    'item_name' => $item->item_name,
+                    'unit_price' => $item->unit_price,
+                    'quantity' => $sessionCart['quantity'],
+                    'item_image_path' => $item->item_image_path
+                ];
                 $totalPrice += $item->unit_price * $sessionCart['quantity'];
             }
         }
