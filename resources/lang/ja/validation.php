@@ -131,5 +131,12 @@ return [
         'item_name' => '商品名',
         'unit_price' => '単価',
         'item_category' => '商品分類',
+        'scheduled_date' => '予約日',
+        'scheduled_time' => '予約時間',
+    ],
+    'values'               => [
+        'scheduled_date' => [
+            'tomorrow' => '明日',
+        ],
     ],
 ];

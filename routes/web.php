@@ -39,6 +39,7 @@ Route::middleware('auth:users')->group(function(){
 Route::prefix('cart')->middleware('auth:users')->group(function(){
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::post('add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('store', [CartController::class, 'store'])->name('cart.store');
     Route::delete('delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
