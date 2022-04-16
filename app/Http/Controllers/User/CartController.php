@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCartRequest;
 use App\Services\CartService;
+use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendOrderConfirmMail;
 
 class CartController extends Controller
 {
@@ -31,8 +33,9 @@ class CartController extends Controller
         // カートを確定
         $order = $cartService->order($request->scheduled_date, $request->scheduled_time);
 
-        // 確定できたら注文完了画面へ、NGの場合はカート画面に戻す
+        // 確定できたらメール送信ジョブを投げて注文完了画面へ、NGの場合はカート画面に戻す
         if($order) {
+            SendOrderConfirmMail::dispatch(Auth::user(), $order);
             return view('user.cart.complete', compact('order'));
         } else {
             return redirect()->route('user.cart.index');
