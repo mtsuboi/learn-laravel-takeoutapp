@@ -48,6 +48,9 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-dropdown-link :href="route('user.orders.index')">
+                                予約履歴
+                            </x-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('user.logout') }}">
                                 @csrf
@@ -112,7 +115,9 @@
                     <x-responsive-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
                         カートを表示
                     </x-responsive-nav-link>
-                    
+                    <x-responsive-nav-link :href="route('user.orders.index')" :active="request()->routeIs('user.orders.index')">
+                        予約履歴
+                    </x-responsive-nav-link>
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('user.logout') }}">
                         @csrf
