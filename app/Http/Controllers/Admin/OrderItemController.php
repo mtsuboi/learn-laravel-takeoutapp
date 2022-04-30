@@ -30,6 +30,7 @@ class OrderItemController extends Controller
                             ->where('item_name','like','%' . $item_name . '%');
                     })
                     ->where('scheduled_date', '=', $scheduled_date)
+                    ->whereNull('cancel_datetime')
                     ->groupBy('item_id')
                     ->groupBy('item_name')
                     ->orderBy('item_id')
