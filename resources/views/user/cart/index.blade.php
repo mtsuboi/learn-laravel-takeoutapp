@@ -50,7 +50,7 @@
                         <div>
                           <x-label>予約時間</x-label>
                           <select name="scheduled_time" class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" >
-                            @for($time = 10; $time <= 19; $time++)
+                            @for($time = 10; $time <= 18; $time++)
                               <option value="{{ $time }}" @if(old('scheduled_time') == $time) selected @endif>{{ $time }}時</option>
                             @endfor
                           </select>

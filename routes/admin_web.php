@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\OrderItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::get('/', function () {
 });
 
 Route::resource('items', ItemController::class)->middleware('auth:admin');
+
+Route::get('orderitems', [OrderItemController::class, 'index'])
+    ->middleware('auth:admin')->name('orderitems.index');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

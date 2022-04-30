@@ -25,7 +25,7 @@ class StoreCartRequest extends FormRequest
     {
         return [
             'scheduled_date' => 'required|date|after_or_equal:tomorrow',
-            'scheduled_time' => 'required|integer|between:10,19',
+            'scheduled_time' => 'required|integer|between:10,18',
         ];
     }
 }

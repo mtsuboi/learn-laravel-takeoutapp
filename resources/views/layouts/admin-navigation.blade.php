@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('admin.items.index')" :active="request()->routeIs('admin.items.index')">
                         商品マスタ
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.orderitems.index')" :active="request()->routeIs('admin.orderitems.index')">
+                        商品別注文数一覧
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -71,6 +74,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.items.index')" :active="request()->routeIs('admin.items.index')">
                 商品マスタ
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.orderitems.index')" :active="request()->routeIs('admin.orderitems.index')">
+                商品別注文数一覧
             </x-responsive-nav-link>
         </div>
 
