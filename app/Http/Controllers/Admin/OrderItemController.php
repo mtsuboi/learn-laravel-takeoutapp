@@ -29,7 +29,6 @@ class OrderItemController extends Controller
                         $join->on('order_details.order_id', '=', 'orders.id')
                             ->where('item_name','like','%' . $item_name . '%');
                     })
-                    ->where('user_id', Auth::id())
                     ->where('scheduled_date', '=', $scheduled_date)
                     ->groupBy('item_id')
                     ->groupBy('item_name')
