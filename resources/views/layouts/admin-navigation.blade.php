@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.orderitems.index')" :active="request()->routeIs('admin.orderitems.index')">
                         商品別注文数一覧
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
+                        注文一覧
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -77,6 +80,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.orderitems.index')" :active="request()->routeIs('admin.orderitems.index')">
                 商品別注文数一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
+                注文一覧
             </x-responsive-nav-link>
         </div>
 
