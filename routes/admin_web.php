@@ -28,6 +28,7 @@ Route::get('orderitems', [OrderItemController::class, 'index'])
 Route::prefix('orders')->middleware('auth:admin')->group(function(){
     Route::get('/', [OrderController::class, 'index'])->name('orders.index');
     Route::get('show/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('print', [OrderController::class, 'print'])->name('orders.print');
 });
 
 Route::get('/dashboard', function () {

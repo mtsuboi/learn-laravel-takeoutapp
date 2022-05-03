@@ -32,6 +32,12 @@
                     <span>検索</span>
                   </x-button>
                 </div>
+                <div class="ml-2">
+                  <x-button class="mt-5" formaction="{{ route('admin.orders.print') }}" formtarget="_blank">
+                    <svg  class="w-5 h-5 fill-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                    <span>印刷</span>
+                  </x-button>
+                </div>
               </div>
             </form>
 
@@ -52,7 +58,7 @@
                 <tr>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">{{ $order->id }}</td>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">
-                    <a class="no-underline hover:underline text-blue-500" href="{{ route('admin.orders.show', $order->id) }}">{{ $order->name }}</a>
+                    <a class="no-underline hover:underline text-blue-500" href="{{ route('admin.orders.show', $order->id) }}">{{ $order->user->name }}</a>
                   </td>
                   <td class="px-1 md:px-4 py-3 border-t-2 border-gray-200">
                     @if ($order->cancel_datetime)

@@ -6,67 +6,55 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Carbon\Carbon;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, OrderService $orderService)
     {
         $order_id = $request->input('order_id');
-        
+        $scheduled_date = $request->input('scheduled_date');
+        $user_name = $request->input('user_name');        
+
         if($order_id) {
             // 注文番号が入っていたらそれ以外の条件はクリアする
             $scheduled_date = null;
             $user_name = null;
-        } else {
-            // 注文番号が入っていなくて他の条件も入ってなかったら予約日は当日にする
-            if(!$request->input('scheduled_date') && !$request->input('user_name')) {
-                $scheduled_date = Carbon::today()->toDateString();
-            } else {
-                $scheduled_date = $request->input('scheduled_date');
-            }
-
-            $user_name = $request->input('user_name');
+        } elseif(!$scheduled_date && !$user_name) {
+            // 予約日も顧客名も入ってなかったら予約日は当日にする
+            $scheduled_date = Carbon::today()->toDateString();
         }
 
-        $select = 'orders.id, users.name, cancel_datetime, scheduled_date, scheduled_time,';
-        $select.= 'sum(quantity) as quantity,';
-        $select.= 'sum(quantity * unit_price) as price';
+        $orders = $orderService->getOrders($order_id, $scheduled_date, $user_name, false, true);
 
-        $query = Order::selectRaw($select)
-                    ->join('users', function ($join) use($user_name) {
-                        $join->on('users.id', '=', 'orders.user_id')
-                            ->where('name','like','%' . $user_name . '%');
-                    })
-                    ->join('order_details', 'order_details.order_id', '=', 'orders.id')
-                    ->groupBy('orders.id', 'users.name', 'cancel_datetime', 'scheduled_date', 'scheduled_time')
-                    ->orderBy('orders.id');
-        
-        if($order_id) {
-            $query = $query->where('orders.id', '=', $order_id);
-        } elseif($scheduled_date) {
-            $query = $query->where('scheduled_date', '=', $scheduled_date);
-        }
-        
-        $orders = $query->paginate(5)->withQueryString();
-
-        // dd($orders);
         return view('admin.orders.index', compact('orders', 'order_id', 'scheduled_date', 'user_name'));        
     }
 
-    public function show($id)
+    public function show($id, OrderService $orderService)
     {
-        $order = Order::with('orderDetails')
-                    ->with('user')
-                    ->with('orderDetails.item')
-                    ->findOrFail($id);
+        $order = $orderService->getOrders($id)->first();
+        return view('admin.orders.show', compact('order'));
+    }
 
-        // 商品点数と合計金額を計算
-        $itemQuantity = $order->orderDetails->sum('quantity');
-        $totalPrice = $order->orderDetails->sum(function ($detail) {
-            return $detail->quantity * $detail->unit_price;
-        });
+    public function print(Request $request, OrderService $orderService)
+    {
+        $order_id = $request->input('order_id');
+        $scheduled_date = $request->input('scheduled_date');
+        $user_name = $request->input('user_name');        
 
-        // dd($order);
-        return view('admin.orders.show', compact('order', 'itemQuantity', 'totalPrice'));
+        if($order_id) {
+            // 注文番号が入っていたらそれ以外の条件はクリアする
+            $scheduled_date = null;
+            $user_name = null;
+        } elseif(!$scheduled_date && !$user_name) {
+            // 予約日も顧客名も入ってなかったら予約日は当日にする
+            $scheduled_date = Carbon::today()->toDateString();
+        }
+
+        $orders = $orderService->getOrders($order_id, $scheduled_date, $user_name, true, false);
+        
+        $pdf = \PDF::loadView('admin.orders.print', compact('orders'));
+        $pdf->setPaper('A6');
+        return $pdf->stream('orders.pdf');
     }
 }

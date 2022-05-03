@@ -33,11 +33,11 @@
             <div class="flex items-center">
               <div class="p-3">
                 <p class="text-sm text-gray-700 font-medium">商品点数:</p>
-                <p><span class="text-2xl text-gray-700">{{ $itemQuantity }}</span><span class="text-sm text-gray-700">点</span></p>
+                <p><span class="text-2xl text-gray-700">{{ $order->quantity }}</span><span class="text-sm text-gray-700">点</span></p>
               </div>
               <div class="p-3">
                 <p class="text-sm text-gray-700 font-medium">合計金額:</p>
-                <p><span class="text-2xl text-gray-700">{{ number_format($totalPrice) }}</span><span class="text-sm text-gray-700">円(税込み)</span></p>
+                <p><span class="text-2xl text-gray-700">{{ number_format($order->price) }}</span><span class="text-sm text-gray-700">円(税込み)</span></p>
               </div>
             </div>
           </div>
